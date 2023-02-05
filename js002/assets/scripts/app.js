@@ -3,6 +3,7 @@ alert(message);
 
 const initValue = 0;
 let result = initValue;
+let logs = [];  // 빈 배열 생성
 
 function addTest(num1, num2) {
     const addResult = num1 + num2;
@@ -26,6 +27,14 @@ function add() {
     // result = result + parseInt(userInput.value);    // 항상 정수로 변환
     // result = result + parseFloat(userInput.value);  // 항상 실수로 변환
     writeLog('+', prevResult, inputNumber);
+    const log = {
+        operation: 'ADD',
+        previous: prevResult,
+        input: inputNumber,
+        current: result
+    };
+    logs.push(log);
+    console.log(logs);
 }
 
 function substract() {
