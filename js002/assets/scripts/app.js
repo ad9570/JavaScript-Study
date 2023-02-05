@@ -20,6 +20,17 @@ function writeLog(operator, prevValue, inputValue) {    // 계산 내용 및 결
     outputResult(result, description);
 }
 
+function dataLog(operation, prevValue, inputValue, newValue) {
+    const log = {
+        operation: operation,
+        previous: prevValue,
+        input: inputValue,
+        current: newValue
+    };
+    logs.push(log);
+    console.log(logs);
+}
+
 function add() {
     const inputNumber = getUserInput();
     const prevResult = result;
@@ -27,14 +38,7 @@ function add() {
     // result = result + parseInt(userInput.value);    // 항상 정수로 변환
     // result = result + parseFloat(userInput.value);  // 항상 실수로 변환
     writeLog('+', prevResult, inputNumber);
-    const log = {
-        operation: 'ADD',
-        previous: prevResult,
-        input: inputNumber,
-        current: result
-    };
-    logs.push(log);
-    console.log(logs);
+    dataLog('ADD', prevResult, inputNumber, result);
 }
 
 function substract() {
@@ -42,6 +46,7 @@ function substract() {
     const prevResult = result;
     result = result - inputNumber;
     writeLog('-', prevResult, inputNumber);
+    dataLog('SUBSTRACT', prevResult, inputNumber, result);
 }
 
 function multiply() {
@@ -49,6 +54,7 @@ function multiply() {
     const prevResult = result;
     result = result * inputNumber;
     writeLog('*', prevResult, inputNumber);
+    dataLog('MULTIPLY', prevResult, inputNumber, result);
 }
 
 function divide() {
@@ -56,6 +62,7 @@ function divide() {
     const prevResult = result;
     result = result / inputNumber;
     writeLog('/', prevResult, inputNumber);
+    dataLog('DIVIDE', prevResult, inputNumber, result);
 }
 
 addBtn.addEventListener('click', add);
