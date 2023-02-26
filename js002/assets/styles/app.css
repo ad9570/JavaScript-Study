@@ -77,9 +77,3 @@ header {
   margin-top: 1rem;
   text-align: center;
 }
-
-#errors {
-  text-align: center;
-  font-size: 1.5rem;
-  color: crimson;
-}

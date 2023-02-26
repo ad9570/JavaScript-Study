@@ -1,6 +1,3 @@
-const message = 'This works - imported scripts!';
-alert(message);
-
 const initValue = 0;
 let result = initValue;
 let logs = [];  // 빈 배열 생성
@@ -16,6 +13,7 @@ function getUserInput() {       // userInput 값을 직접 구하지 않고 함�
 }
 
 function writeLog(operator, prevValue, inputValue) {    // 계산 내용 및 결과 텍스트 출력
+    console.log(operator, prevValue, inputValue);
     const description = `${prevValue} ${operator} ${inputValue}`;
     outputResult(result, description);
 }
@@ -69,8 +67,3 @@ addBtn.addEventListener('click', add);
 subtractBtn.addEventListener('click', substract);
 multiplyBtn.addEventListener('click', multiply);
 divideBtn.addEventListener('click', divide);
-
-// let log = '0 + 10 * 2 / (5 - 1)';       // 수학 연산을 실행하지 않음
-// let log = 'result + 10 * 2 / (5 - 1)';  // ''(따옴표)로 인해 JavaScript가 안의 내용을 숫자, 변수가 아닌 정적 텍스트로 인식
-// let log = initValue + ' + 10 * 2 / (5 - 1)';
-// let log = `${initValue} + 10 * 2 / (5 - 1)`;    // 템플릿 리터럴
