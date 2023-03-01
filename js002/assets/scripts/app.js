@@ -2,12 +2,6 @@ const initValue = 0;
 let result = initValue;
 let logs = [];  // 빈 배열 생성
 
-function addTest(num1, num2) {
-    const addResult = num1 + num2;
-    return addResult;
-}
-alert(addTest(1, 3));
-
 function getUserInput() {       // userInput 값을 직접 구하지 않고 함수를 이용해 구함 : 로직 아웃소싱
     return +userInput.value;
 }
