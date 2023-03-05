@@ -24,6 +24,13 @@ function dataLog(operation, prevValue, inputValue, newValue) {
 }
 
 function calculate(type) {
+    if (        // 다음 조건을 모두 다 만족하는 경우
+        type !== 'ADD' &&
+        type !== 'SUBSTRACT' &&
+        type !== 'MULTIPLY' &&
+        type !== 'DIVIDE'
+    ) return;   // 이 아래 문장은 실행되지 않고 함수 종료
+
     const inputNumber = getUserInput();
     const prevResult = result;
     let operator;
