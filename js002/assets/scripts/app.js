@@ -23,38 +23,43 @@ function dataLog(operation, prevValue, inputValue, newValue) {
     console.log(logs);
 }
 
-function add() {
+function calculate(type) {
     const inputNumber = getUserInput();
     const prevResult = result;
-    result = result + inputNumber; // <input>의 value는 값에 상관 없이 항상 문자열 -> 숫자로 변환
-    // result = result + parseInt(userInput.value);    // 항상 정수로 변환
-    // result = result + parseFloat(userInput.value);  // 항상 실수로 변환
-    writeLog('+', prevResult, inputNumber);
-    dataLog('ADD', prevResult, inputNumber, result);
+    let operator;
+
+    if (type === 'ADD') {
+        result += inputNumber;
+        operator = '+';
+    } else if (type === 'SUBSTRACT') {
+        result -= inputNumber;
+        operator = '-';
+    } else if (type === 'MULTIPLY') {
+        result *= inputNumber;
+        operator = '*';
+    } else if (type === 'DIVIDE') {
+        result /= inputNumber;
+        operator = '/';
+    }
+
+    writeLog(operator, prevResult, inputNumber);
+    dataLog(type, prevResult, inputNumber, result);
+}
+
+function add() {
+    calculate('ADD');
 }
 
 function substract() {
-    const inputNumber = getUserInput();
-    const prevResult = result;
-    result = result - inputNumber;
-    writeLog('-', prevResult, inputNumber);
-    dataLog('SUBSTRACT', prevResult, inputNumber, result);
+    calculate('SUBSTRACT');
 }
 
 function multiply() {
-    const inputNumber = getUserInput();
-    const prevResult = result;
-    result = result * inputNumber;
-    writeLog('*', prevResult, inputNumber);
-    dataLog('MULTIPLY', prevResult, inputNumber, result);
+    calculate('MULTIPLY');
 }
 
 function divide() {
-    const inputNumber = getUserInput();
-    const prevResult = result;
-    result = result / inputNumber;
-    writeLog('/', prevResult, inputNumber);
-    dataLog('DIVIDE', prevResult, inputNumber, result);
+    calculate('DIVIDE');
 }
 
 addBtn.addEventListener('click', add);
