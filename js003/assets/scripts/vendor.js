@@ -1,3 +1,4 @@
+// 개발자가 하드코딩한 값이 아닌, HTML코드를 참조하는 상수 등은 대문자 대신 일반적인 Camel 표기법 사용
 const monsterHealthBar = document.getElementById('monster-health');
 const playerHealthBar = document.getElementById('player-health');
 const bonusLifeEl = document.getElementById('bonus-life');
