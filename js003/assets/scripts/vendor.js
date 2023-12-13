@@ -31,13 +31,14 @@ function increasePlayerHealth(healValue) {
     playerHealthBar.value = +playerHealthBar.value + healValue;
 }
 
-function resetGame(value) {
+function resetUI(value) {
     playerHealthBar.value = value;
     monsterHealthBar.value = value;
+    bonusLifeEl.style.display = null;
 }
 
 function removeBonusLife() {
-    bonusLifeEl.parentNode.removeChild(bonusLifeEl);
+    bonusLifeEl.style.display = 'none';
 }
 
 function setPlayerHealth(health) {
