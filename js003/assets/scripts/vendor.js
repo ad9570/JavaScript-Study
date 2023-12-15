@@ -37,6 +37,12 @@ function resetUI(value) {
     bonusLifeEl.style.display = null;
 }
 
+function disableAction() {
+    attackBtn.style.display = 'none';
+    strongAttackBtn.style.display = 'none';
+    healBtn.style.display = 'none';
+}
+
 function removeBonusLife() {
     bonusLifeEl.style.display = 'none';
 }
