@@ -1,5 +1,5 @@
 // 개발자가 하드코딩한 상수값은 대문자로 작성, _로 단어를 구분해 표기하는것이 일반적
-const PLAYER_ATTACK_DAMAGE = 11;
+const PLAYER_NORMAL_ATTACK_DAMAGE = 11;
 const PLAYER_STRONG_ATTACK_DAMAGE = 17;
 const MONSTER_ATTACK_DAMAGE = 20;
 const HEAL_VALUE = 14;
@@ -139,15 +139,8 @@ function endRound() {
 }
 
 function attackMonster(mode) {
-    let maxDamage;
-    let logEvnet;
-    if (mode === ATTACK_NORMAL) {
-        maxDamage = PLAYER_ATTACK_DAMAGE;
-        logEvnet = LOG_PLAYER_NORMAL_ATTACK;
-    } else if (mode === ATTACK_STRONG) {
-        maxDamage = PLAYER_STRONG_ATTACK_DAMAGE;
-        logEvnet = LOG_PLAYER_STRONG_ATTACK;
-    }
+    const maxDamage = mode === ATTACK_NORMAL ? PLAYER_NORMAL_ATTACK_DAMAGE : PLAYER_STRONG_ATTACK_DAMAGE;
+    const logEvent = mode === ATTACK_NORMAL ? LOG_PLAYER_NORMAL_ATTACK : LOG_PLAYER_STRONG_ATTACK;
 
     const playerDamage = dealMonsterDamage(maxDamage);
     if (monsterHealth > playerDamage) {
@@ -155,7 +148,7 @@ function attackMonster(mode) {
     } else {
         monsterHealth = 0;
     }
-    writeLog(logEvnet, playerDamage);
+    writeLog(logEvent, playerDamage);
     endRound();
 }
 
