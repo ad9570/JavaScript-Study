@@ -31,55 +31,45 @@ adjustHealthBars(maxLife);
 
 function writeLog(eventName, eventValue) {
     let logEntry;
-    if (eventName === LOG_PLAYER_NORMAL_ATTACK) {
-        logEntry = {
-            event: eventName,
-            value: eventValue,
-            target: 'MONSTER',
-            resultMonsterHealth: monsterHealth,
-            resultPlayerHealth: playerHealth
-        };
-    } else if (eventName === LOG_PLAYER_STRONG_ATTACK) {
-        logEntry = {
-            event: eventName,
-            value: eventValue,
-            target: 'MONSTER',
-            resultMonsterHealth: monsterHealth,
-            resultPlayerHealth: playerHealth
-        };
-    } else if (eventName === LOG_MONSTER_ATTACK) {
-        logEntry = {
-            event: eventName,
-            value: eventValue,
-            target: 'PLAYER',
-            resultMonsterHealth: monsterHealth,
-            resultPlayerHealth: playerHealth
-        };
-    } else if (eventName === LOG_PLAYER_HEAL) {
-        logEntry = {
-            event: eventName,
-            value: eventValue,
-            target: 'PLAYER',
-            resultMonsterHealth: monsterHealth,
-            resultPlayerHealth: playerHealth
-        };
-    } else if (eventName === LOG_PLAYER_BONUS_LIFE) {
-        logEntry = {
-            event: eventName,
-            value: eventValue,
-            target: 'PLAYER',
-            resultMonsterHealth: monsterHealth,
-            resultPlayerHealth: playerHealth
-        };
-    } else if (eventName === LOG_GAME_OVER) {
-        logEntry = {
-            event: eventName,
-            value: eventValue,
-            resultMonsterHealth: monsterHealth,
-            resultPlayerHealth: playerHealth
-        };
-    } else {    // invalid event name
-        return;
+    switch (eventName) {
+        case LOG_PLAYER_NORMAL_ATTACK:
+        case LOG_PLAYER_STRONG_ATTACK:
+            logEntry = {
+                event: eventName,
+                value: eventValue,
+                target: 'MONSTER',
+                resultMonsterHealth: monsterHealth,
+                resultPlayerHealth: playerHealth
+            };
+            break;
+        case LOG_MONSTER_ATTACK:
+            logEntry = {
+                event: eventName,
+                value: eventValue,
+                target: 'PLAYER',
+                resultMonsterHealth: monsterHealth,
+                resultPlayerHealth: playerHealth
+            };
+            break;
+        case LOG_PLAYER_HEAL:
+        case LOG_PLAYER_BONUS_LIFE:
+            logEntry = {
+                event: eventName,
+                value: eventValue,
+                target: 'PLAYER',
+                resultPlayerHealth: playerHealth
+            };
+            break;
+        case LOG_GAME_OVER:
+            logEntry = {
+                event: eventName,
+                value: eventValue,
+                resultMonsterHealth: monsterHealth,
+                resultPlayerHealth: playerHealth
+            };
+            break;
+        default:    // invalid event name
+            logEntry = {};
     }
 
     battleLog.push(logEntry);
@@ -176,7 +166,23 @@ function healHandler() {
 }
 
 function printLogHandler() {
-    console.log(battleLog);
+    for (let i = 0; i < 3; i++) {
+        console.log('-------START-------');
+    }
+
+    let idx = 0;
+    for (const logEntry of battleLog) {
+        console.log(`#${++idx}`);
+        for (const key in logEntry) {
+            console.log(`${key} ➔ ${logEntry[key]}`);
+        }
+    }
+
+    let j = 0;
+    while (j < 3) {
+        console.log('--------END--------');
+        j++;
+    }
 }
 
 attackBtn.addEventListener('click', attackHandler);
