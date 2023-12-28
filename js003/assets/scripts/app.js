@@ -22,6 +22,7 @@ if (isNaN(maxLife) || maxLife <= 0) {
 }
 
 let battleLog = [];
+let lastLoggedEntry = 0;
 
 let monsterHealth = maxLife;
 let playerHealth = maxLife;
@@ -118,10 +119,10 @@ function endRound() {
 
     // finish the game if the result is decided
     if (playerHealth <= 0 || monsterHealth <= 0) {
-        printLogHandler();
         if (confirm('Play again?')) {
             resetGame();
             battleLog = [];
+            lastLoggedEntry = 0;
         } else {
             disableAction();
         }
@@ -170,12 +171,18 @@ function printLogHandler() {
         console.log('-------START-------');
     }
 
-    let idx = 0;
+    let idx = 1;
     for (const logEntry of battleLog) {
-        console.log(`#${++idx}`);
-        for (const key in logEntry) {
-            console.log(`${key} ➔ ${logEntry[key]}`);
+        // do not print event log which is already printed
+        if (!lastLoggedEntry || lastLoggedEntry < idx) {
+            console.log(`#${idx}`);
+            for (const key in logEntry) {
+                console.log(`${key} ➔ ${logEntry[key]}`);
+            }
+            lastLoggedEntry = idx;
+            break;  // print 1 log per button click
         }
+        idx++;
     }
 
     let j = 0;
