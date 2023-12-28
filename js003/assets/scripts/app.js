@@ -13,12 +13,26 @@ const LOG_PLAYER_HEAL = 'PLAYER_HEAL';
 const LOG_PLAYER_BONUS_LIFE = 'PLAYER_BONUS_LIFE';
 const LOG_GAME_OVER = 'GAME_OVER';
 
-const enteredValue = prompt('Maximum life for you and the monster.', '100');
-let maxLife = parseFloat(enteredValue);
+function getMaxLife() {
+    const enteredValue = prompt('Maximum life for you and the monster.', '100');
 
-if (isNaN(maxLife) || maxLife <= 0) {
+    const parsedValue = parseFloat(enteredValue);
+    if (isNaN(parsedValue) || parsedValue <= 0) {
+        throw {message: "Invalid value. The maximum life should be a positive number.\nDefault value of '100' will be used."};
+    }
+
+    return parsedValue;
+}
+
+let maxLife;
+try {
+    maxLife = getMaxLife();
+} catch (error) {
+    console.log(error);
+    alert(error.message);
     maxLife = 100;
-    alert("Invalid value. The maximum life will be 100(default value).");
+} finally {
+
 }
 
 let battleLog = [];
