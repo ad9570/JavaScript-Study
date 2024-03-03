@@ -2,6 +2,11 @@ const initValue = 0;
 let result = initValue;
 let logs = [];  // 빈 배열 생성
 
+const ADD = 'ADD';
+const SUBTRACT = 'SUBTRACT';
+const MULTIPLY = 'MULTIPLY';
+const DIVIDE = 'DIVIDE';
+
 function getUserInput() {       // userInput 값을 직접 구하지 않고 함수를 이용해 구함 : 로직 아웃소싱
     return +userInput.value;
 }
@@ -26,27 +31,29 @@ function dataLog(operation, prevValue, inputValue, newValue) {
 function calculate(type) {
     const inputNumber = getUserInput();
 
-    if (        // 다음 조건을 모두 다 만족하는 경우
-        type !== 'ADD' &&
-        type !== 'SUBSTRACT' &&
-        type !== 'MULTIPLY' &&
-        type !== 'DIVIDE' ||
+    if (                // 다음 조건을 모두 다 만족하는 경우
+        type !== ADD &&
+        type !== SUBTRACT &&
+        type !== MULTIPLY &&
+        type !== DIVIDE ||
         !inputNumber    // inputNumber === 0
-    ) return;   // 이 아래 문장은 실행되지 않고 함수 종료
+    ) {
+        return;         // 이 아래 문장은 실행되지 않고 함수 종료
+    }
 
     const prevResult = result;
     let operator;
 
-    if (type === 'ADD') {
+    if (type === ADD) {
         result += inputNumber;
         operator = '+';
-    } else if (type === 'SUBSTRACT') {
+    } else if (type === SUBTRACT) {
         result -= inputNumber;
         operator = '-';
-    } else if (type === 'MULTIPLY') {
+    } else if (type === MULTIPLY) {
         result *= inputNumber;
         operator = '*';
-    } else if (type === 'DIVIDE') {
+    } else if (type === DIVIDE) {
         result /= inputNumber;
         operator = '/';
     }
@@ -55,23 +62,7 @@ function calculate(type) {
     dataLog(type, prevResult, inputNumber, result);
 }
 
-function add() {
-    calculate('ADD');
-}
-
-function substract() {
-    calculate('SUBSTRACT');
-}
-
-function multiply() {
-    calculate('MULTIPLY');
-}
-
-function divide() {
-    calculate('DIVIDE');
-}
-
-addBtn.addEventListener('click', add);
-subtractBtn.addEventListener('click', substract);
-multiplyBtn.addEventListener('click', multiply);
-divideBtn.addEventListener('click', divide);
+addBtn.addEventListener('click', calculate.bind(this, ADD));
+subtractBtn.addEventListener('click', calculate.bind(this, SUBTRACT));
+multiplyBtn.addEventListener('click', calculate.bind(this, MULTIPLY));
+divideBtn.addEventListener('click', calculate.bind(this, DIVIDE));
