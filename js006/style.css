@@ -1,0 +1,11 @@
+.orange-bg {
+    background-color: orange;
+}
+
+.visible {
+    display: block;
+}
+
+.invisible {
+    display: none;
+}
