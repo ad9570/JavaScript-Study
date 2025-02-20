@@ -1,10 +1,11 @@
 const addMoviewBtn = document.getElementById('add-movie-btn');
-const searchBtn = document.getElementById('search-btn');
 const addMovieInputs = document.getElementById('user-input').querySelectorAll('input');
-let id = 1;
+const searchBtn = document.getElementById('search-btn');
+const searchInput = document.getElementById('filter-title');
+let movieId = 100;
 const movies = [];
 
-const renderMovies = () => {
+const renderMovies = (filter = '') => {
     const movieList = document.getElementById('movie-list');
     movieList.innerHTML = '';
 
@@ -15,7 +16,11 @@ const renderMovies = () => {
         movieList.classList.add('visible');
     }
 
-    movies.forEach(movie => {
+    const filteredMovies = !filter
+        ? movies
+        : movies.filter(movie => movie.info.title.includes(filter));
+
+    filteredMovies.forEach(movie => {
         const movieItem = document.createElement('li');
         let title;
         let extraInfo;
@@ -44,7 +49,7 @@ const addMovieHandler = () => {
     }
 
     const newMovie = {
-        id,
+        movieId,
         info: {
             title,
             [extraName]: extraValue
@@ -52,9 +57,13 @@ const addMovieHandler = () => {
     };
 
     movies.push(newMovie);
-    id++;
+    movieId++;
 
     renderMovies();
+};
+
+const searchMovieHandler = () => {
+    renderMovies(searchInput.value);
 };
 
 const keyEvents = {
@@ -62,9 +71,16 @@ const keyEvents = {
         if (e.keyCode === 13) {
             addMovieHandler();
         }
+    },
+    searchMovie: e => {
+        if (e.keyCode === 13) {
+            searchMovieHandler();
+        }
     }
 };
 
 addMoviewBtn.addEventListener('click', addMovieHandler);
+searchBtn.addEventListener('click', searchMovieHandler);
 
 addMovieInputs.forEach(input => input.addEventListener('keyup', keyEvents.addMovie));
+searchInput.addEventListener('keyup', keyEvents.searchMovie);
