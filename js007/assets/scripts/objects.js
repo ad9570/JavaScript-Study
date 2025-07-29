@@ -55,7 +55,7 @@ const addMovieHandler = () => {
             title,
             [extraName]: extraValue
         },
-        getFormattedTitle: function () {
+        getFormattedTitle() {
             return this.info.title.charAt(0).toUpperCase() + this.info.title.slice(1);
         }
     };
